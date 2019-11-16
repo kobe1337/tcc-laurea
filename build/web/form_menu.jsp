@@ -8,45 +8,42 @@
               initial-scale=1, maximum-scale=1, 
               user-scalable=no"
               name="viewport"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
-        <title>Láurea Reforço Escolar</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/estilo_form.css">
+        <link rel="stylesheet" href="datatables/jquery.dataTables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link rel="shortcut icon" href="assets/img/logo/logo_menu.png"/>  
+        <title>Cadastrar Menu</title>
     </head>
-    <body>
-        <div class="container">
-            <%@include file="banner.jsp" %>
-            <%@include file="menu.jsp" %>
-            <h3>Novo Menu</h3>
+    <body class="body">
+        <%@include file="menu.jsp" %>
+
+        <div class="div_formulario">
             
-            <form action="gerenciar_menu.do" method="POST">
+            <form action="gerenciar_menu.do" method="POST" class="form">
                 
                 <input type="hidden" name="idmenu" id="idmenu" value="${menu.idmenu}"/>
-                <div class="row">
-                    <div class="form-group col-sm-8">
-                        <label for="menu">Menu</label>
-                        <input type="text" class="form-control" id="menu"
-                               name="menu" required="" maxlength="45"
-                               value="${menu.menu}"/>
-                    </div>    
+                <div class="form-group ">
+                    <h3 class="titulo">Novo Menu</h3>
+                    <div class="campo_obrigatorio">* campos de preenchimento obrigatório</div>
+                </div>
+                <div class="col-md-4 mb-3 ">
+
+                    <label for="menu">Menu*</label>
+                    <input type="text" class="form-control" id="menu" name="menu" required="" maxlength="45" value="${menu.menu}"/>
+
                 </div>    
-               <div class="row">
-                    <div class="form-group col-sm-8">
-                        <label for="link">Link</label>
-                        <input type="text" class="form-control" id="link"
-                               name="link" required="" maxlength="100"
-                               value="${menu.link}"/>
-                    </div>    
+                <div class="col-md-4 mb-3 ">
+
+                    <label for="link">Link*</label>
+                    <input type="text" class="form-control" id="link" name="link" required="" maxlength="45" value="${menu.link}"/>
+
                 </div>   
-                <div class="row">
-                    <div class="form-group col-sm-8">
-                        <label for="icone">Icone</label>
-                        <input type="text" class="form-control" id="icone"
-                               name="icone" maxlength="45"
-                               value="${menu.icone}"/>
-                    </div>    
+                <div class="col-md-4 mb-3 ">
+                    <label for="icone">Icone</label>
+                    <input type="text" class="form-control" id="icone" name="icone" maxlength="45" value="${menu.icone}"/>
+
                 </div> 
-                <div class="row">
-                    <div class="form-group col-sm-8">
+                <div class="col-md-4 mb-3 ">
                         <label for="exibir">Exibir</label>
                         <select name="exibir" required="" class="form-control">
                             <c:if test="${menu.exibir==null}">
@@ -64,12 +61,10 @@
                             </c:if>
                         </select>    
                     </div>    
-                </div>    
-                <div class="row">
-                    <button class="btn btn-success">Gravar</button>
-                    <a href="listar_menu.jsp" class="btn btn-warning">
-                        Voltar
-                    </a>    
+                  
+                <div class="col-md-4 mb-3">
+                    <button class="btn btn-primary">Gravar</button>
+                    <a href="listar_menu.jsp" class="btn btn-outline-dark">Voltar</a>    
                 </div>    
             </form>    
             

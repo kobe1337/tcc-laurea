@@ -68,9 +68,9 @@
                                                 <td style="text-align: center;">${men.contrato.idcontrato}</td>
                                                 <td>${men.contrato.aluno.nome}</td>
                                                 <td>${men.contrato.aluno.responsavel.nome}</td>
-                                               
+
                                                 <td style="text-align: center;">R$${men.valor}</td>
-                                                 <td style="text-align: center;">${men.datap}</td>
+                                                <td style="text-align: center;">${men.datap}</td>
                                                 <td style="text-align: center;">
                                                     <c:if test="${men.status == 2}" > Pendente </c:if>
                                                     <c:if test="${men.status == 1}" > Pago </c:if>
@@ -78,7 +78,7 @@
                                                     <td style="text-align: center;"> 
                                                         <a class="icone_lista" 
                                                            href="gerenciar_mensalidade.do?acao=alterar&idcontrato=${men.contrato.idcontrato}&idmensalidade=${men.idmensalidade}">
-                                                       <img src="assets/img/lista/editar.png">
+                                                        <img src="assets/img/lista/editar.png">
                                                     </a>
                                                 </td>
                                             </tr>
