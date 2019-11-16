@@ -56,7 +56,7 @@ public class GerenciarLogin extends HttpServlet {
                 if(u.getIdusuario() > 0 && u.getSenha().equals(senha)){
                     HttpSession sessao = request.getSession();
                     sessao.setAttribute("ulogado", u);
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("index2.jsp");
                 }else{
                     exibirMensagem("Usuário ou senha inválidos!");
                 }
