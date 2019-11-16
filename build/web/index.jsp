@@ -150,16 +150,6 @@
                             </span>
                         </div>
                     </li>
-                    <li class="list-group-item">
-                        <div class="d-flex justify-content-between">
-                            <img src="assets/img/status_do_sistema/livro.png">
-                            Menus
-                            <span class="badge badge-primary badge-pill">
-                                <jsp:useBean class="DAO.MenuDAO" id="mDAO"/>
-                                <label>${fn:length(mDAO.lista)}</label>
-                            </span>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
