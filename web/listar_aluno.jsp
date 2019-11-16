@@ -9,118 +9,112 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, 
               user-scalable=no" name="viewport"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
         <link rel="stylesheet" href="datatables/jquery.dataTables.min.css"/>
-        <title>Láurea Reforço Escolar</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/estilo_listas.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="assets/img/logo/logo_menu.png"/>  
+        <title>Listar Aluno</title>
 
         <script type="text/javascript">
-            
-            function confirmarExclusao(id, nome){
-                if(confirm('Deseja realmente desativar o(a) aluno(a)  '+nome+' ?')){
-                    location.href='gerenciar_aluno.do?acao=desativar&idaluno='+id;
-                }                
-            }            
+
+            function confirmarExclusao(id, nome) {
+                if (confirm('Deseja realmente desativar o(a) aluno(a)  ' + nome + ' ?')) {
+                    location.href = 'gerenciar_aluno.do?acao=desativar&idaluno=' + id;
+                }
+            }
         </script>
 
     </head>
-    <body>
-        <div class="container">
-            <%@include file="banner.jsp" %>
-            <%@include file="menu.jsp" %>
-            <h1>Lista de Alunos</h1>
+    <body class="body">
+        <%@include file="menu.jsp" %>
+        <div class="row">
+            <a href="form_aluno.jsp" class="" > <div class="float-left" id="btn_cadastrar"> Cadastrar Aluno </div></a>
+        </div>
+        <div class="row  justify-content-center" id="listagem">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm table-striped"
+                       id ="listaAluno" >
 
-            <a href="form_aluno.jsp" class="btn btn-primary">
-                Novo Cadastro
-            </a>
-            <table class="table table-hover table-striped table-bordered display" 
-                   id ="listaAluno" >
-
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Data de Nascimento</th>
-                        <th>CPF</th>
-                        <th>RG</th>
-                        <th>Status</th>
-                        <th>Nome do Responsável</th>
-                        <th>Nome de Usuário</th>
-                        <th>Opções</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Data de Nascimento</th>
-                        <th>CPF</th>
-                        <th>RG</th>
-                        <th>Status</th>
-                        <th>Nome do Responsável</th>
-                        <th>Nome de Usuário</th>
-                        <th>Opções</th>
-                    </tr>
-                </tfoot>
-
-                <jsp:useBean class="DAO.AlunoDAO" id="aDAO" />
-
-                <tbody>
-                    <c:forEach var="a" items="${aDAO.lista}">
+                    <thead>
                         <tr>
-                            <td>${a.idaluno}</td>
-                            <td>${a.nome}</td>
-                            <td>${a.datanasc}</td>
-                            <td>${a.cpf}</td>
-                            <td>${a.rg}</td>
-                            <td>
-                                <c:if test="${a.status == 2}" > Desativado </c:if>
-                                <c:if test="${a.status == 1}" > Ativado </c:if>
-                            </td>
-                            <td>${a.responsavel}</td>
-                            <td>${a.usuario}</td>
-                            <td>
-                                <a class="btn btn-primary" href="gerenciar_aluno.do?acao=alterar&idaluno=${a.idaluno}">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                </a>
-                                <button class="btn btn-danger" onclick="confirmarExclusao(${a.idaluno}, '${a.nome}')" >
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                </button>    
-                            </td>
+                            <th style="text-align: center;">ID</th>
+                            <th>Nome</th>
+                            <th style="text-align: center;">Status</th>
+                            <th style="text-align: center;">Responsável</th>
+                            <th style="text-align: center;">Editar</th>
+                            <th style="text-align: center;">Excluir</th>
+
                         </tr>
-                    </c:forEach>                    
-                </tbody>    
-            </table>    
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th style="text-align: center;">ID</th>
+                            <th>Nome</th>                          
+                            <th style="text-align: center;">Status</th>
+                            <th style="text-align: center;">Responsável</th>
+                            <th style="text-align: center;">Editar</th>
+                            <th style="text-align: center;">Excluir</th>
+                        </tr>
+                    </tfoot>
+
+                    <jsp:useBean class="DAO.AlunoDAO" id="aDAO" />
+
+                    <tbody>
+                        <c:forEach var="a" items="${aDAO.lista}">
+                            <tr>
+                                <td style="text-align: center;">${a.idaluno}</td>
+                                <td>${a.nome}</td>
+                                <td style="text-align: center;">
+                                    <c:if test="${a.status == 2}" > Desativado </c:if>
+                                    <c:if test="${a.status == 1}" > Ativado </c:if>
+                                    </td>
+                                    <td style="text-align: center;">${a.responsavel}</td>
+                                <td style="text-align: center;">
+                                    <a class="icone_lista" href="gerenciar_aluno.do?acao=alterar&idaluno=${a.idaluno}">
+                                        <img src="assets/img/lista/editar.png">
+                                    </a>
+                                </td>
+                                <td style="text-align: center;">
+                                    <button class="icone_lista deletar" onclick="confirmarExclusao(${a.idaluno}, '${a.nome}')" >
+                                        <img src="assets/img/lista/deletar.png">
+                                    </button>    
+                                </td>
+                            </tr>
+                        </c:forEach>                    
+                    </tbody>    
+                </table>    
+            </div>
         </div>
 
         <script type="text/javascript" src="datatables/jquery.js"></script>
         <script type="text/javascript" src="datatables/jquery.dataTables.min.js" ></script>
         <script type="text/javascript" >
-                
-            $(document).ready(function(){
-                $("#listaAluno").dataTable({
-                    "bJQueryUI":  true,
-                    "oLanguage": {
-                        "sProcessing": "Processando ...",
-                        "sLengthMenu": "Mostrar _MENU_ registros",
-                        "sZeroRecords": "Não foram encontrados resultados",
-                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                        "sInfoEmpty": "Mostrando de 0 até 0 de 0 resgistros",
-                        "sInfoFiltered": "",
-                        "sInfoPostFix": "",
-                        "sSearch": "Pesquisar",
-                        "sUrl": "",
-                        "oPaginate": {
-                            "sFirst" : "Primeiro",
-                            "sPrevious": "Anterior",
-                            "sNext": "Próximo",
-                            "sLast": "Último"
-                        }
-                    }
-                        
-                });
-                    
-            });
+
+                                        $(document).ready(function () {
+                                            $("#listaAluno").dataTable({
+                                                "bJQueryUI": true,
+                                                "oLanguage": {
+                                                    "sProcessing": "Processando ...",
+                                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                                    "sZeroRecords": "Não foram encontrados resultados",
+                                                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                                                    "sInfoEmpty": "Mostrando de 0 até 0 de 0 resgistros",
+                                                    "sInfoFiltered": "",
+                                                    "sInfoPostFix": "",
+                                                    "sSearch": "Pesquisar",
+                                                    "sUrl": "",
+                                                    "oPaginate": {
+                                                        "sFirst": "Primeiro",
+                                                        "sPrevious": "Anterior",
+                                                        "sNext": "Próximo",
+                                                        "sLast": "Último"
+                                                    }
+                                                }
+
+                                            });
+
+                                        });
         </script>
     </body>
 </html>

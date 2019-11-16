@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="datatables/jquery.dataTables.min.css"/>
         <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-        <link rel="shortcut icon" href="assets/img/logo/logo_menu.png"/>  
+        <link rel="shortcut icon" href="assets/img/logo/logo_menu.png"/> 
         <title>Listar Professor</title>
 
         <script type="text/javascript">
@@ -36,7 +36,7 @@
         <div class="row  justify-content-center" id="listagem">
 
             <div class="table-responsive">
-                <table class="table table-hover table-sm table-striped" id="listaUsuario">
+                <table class="table table-hover table-sm table-striped" id="listaProfessor">
 
                     <thead>
                         <tr>

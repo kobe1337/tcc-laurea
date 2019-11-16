@@ -9,12 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, 
-              user-scalable=no" name="viewport"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+        <link rel="stylesheet" type="text/css" href="assets/css/estilo_listas.css">
         <link rel="stylesheet" href="datatables/jquery.dataTables.min.css"/>
-        <title>Láurea Reforço Escolar</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="assets/img/logo/logo_menu.png"/>
+        <title>Listar Atividade</title>
 
         <script type="text/javascript">
 
@@ -26,59 +27,60 @@
         </script>
 
     </head>
-    <body>
-        <div class="container">
-            <%@include file="banner.jsp" %>
-            <%@include file="menu.jsp" %>
-            <h1>Lista de Atividades</h1>
+    <body class="body">
+        <%@include file="menu.jsp" %>
+        <div class="row">
+            <a href="form_atividade.jsp" class="" > <div class="float-left" id="btn_cadastrar"> Cadastrar Atividade</div></a>
+        </div>
 
-            <a href="form_atividade.jsp" class="btn btn-primary">
-                Novo Cadastro
-            </a>
-            <table class="table table-hover table-striped table-bordered display" 
-                   id ="listaAtividade" >
+        <div class="row  justify-content-center" id="listagem">
 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Arquivo</th>
-                        <th>Disciplina</th>
-                        <th>Opções</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Arquivo</th>
-                        <th>Disciplina</th>
-                        <th>Opções</th>
-                    </tr>
-                </tfoot>
+            <div class="table-responsive">
+                <table class="table table-hover table-sm table-striped"
+                       id ="listaAtividade" >
 
-                <jsp:useBean class="DAO.AtividadeDAO" id="atiDAO" />
-
-                <tbody>
-                    <c:forEach var="ati" items="${atiDAO.lista}">
+                    <thead>
                         <tr>
-                            <td>${ati.idatividade}</td>
-                            <td>${ati.nome}</td>
-                            <td>
-                                <a href="arquivos/${ati.arquivo}" download>
-                                    ${ati.arquivo}
-                                </a>
-                            </td>
-                            <td>${ati.disciplina}</td>
-                            <td>
-                                <button class="btn btn-danger" onclick="confirmarExclusao(${ati.idatividade}, '${ati.nome}')" >
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                </button>    
-                            </td>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Arquivo</th>
+                            <th>Disciplina</th>
+                            <th>Opções</th>
                         </tr>
-                    </c:forEach>                    
-                </tbody>    
-            </table>    
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Arquivo</th>
+                            <th>Disciplina</th>
+                            <th>Opções</th>
+                        </tr>
+                    </tfoot>
+
+                    <jsp:useBean class="DAO.AtividadeDAO" id="atiDAO" />
+
+                    <tbody>
+                        <c:forEach var="ati" items="${atiDAO.lista}">
+                            <tr>
+                                <td>${ati.idatividade}</td>
+                                <td>${ati.nome}</td>
+                                <td>
+                                    <a href="arquivos/${ati.arquivo}" download>
+                                        ${ati.arquivo}
+                                    </a>
+                                </td>
+                                <td>${ati.disciplina}</td>
+                                <td>
+                                    <button class="btn btn-danger" onclick="confirmarExclusao(${ati.idatividade}, '${ati.nome}')" >
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>    
+                                </td>
+                            </tr>
+                        </c:forEach>                    
+                    </tbody>    
+                </table>    
+            </div>
         </div>
 
         <script type="text/javascript" src="datatables/jquery.js"></script>

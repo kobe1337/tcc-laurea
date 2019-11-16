@@ -20,7 +20,7 @@
     color:#4F4F4F;
     background-color: #FFF;
     box-shadow: 2px 2px 4px rgba(0,0,0,.3);
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
 }
 

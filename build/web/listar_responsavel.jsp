@@ -11,112 +11,108 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, 
               user-scalable=no" name="viewport"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
         <link rel="stylesheet" href="datatables/jquery.dataTables.min.css"/>
-        <title>Láurea Reforço Escolar</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/estilo_listas.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="assets/img/logo/logo_menu.png"/>  
+        <title>Listar Responsável</title>
 
         <script type="text/javascript">
-            
-            function confirmarExclusao(id, nome){
-                if(confirm('Deseja realmente desativar o responsavel  '+nome+' ?')){
-                    location.href='gerenciar_responsavel.do?acao=desativar&idresponsavel='+id;
-                }                
-            }            
+
+            function confirmarExclusao(id, nome) {
+                if (confirm('Deseja realmente desativar o responsavel  ' + nome + ' ?')) {
+                    location.href = 'gerenciar_responsavel.do?acao=desativar&idresponsavel=' + id;
+                }
+            }
         </script>
 
     </head>
-    <body>
-        <div class="container">
-            <%@include file="banner.jsp" %>
-            <%@include file="menu.jsp" %>
-            <h1>Lista de Responsáveis</h1>
+    <body class="body">
+        <%@include file="menu.jsp" %>
+        <div class="row">
+            <a href="form_responsavel.jsp" class="" > <div class="float-left" id="btn_cadastrar"> Cadastrar Responsável </div></a>
+        </div>
+        <div class="row  justify-content-center" id="listagem">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm table-striped" 
+                       id ="listaResponsavel" >
 
-            <a href="form_responsavel.jsp" class="btn btn-primary">
-                Novo Cadastro
-            </a>
-            <table class="table table-hover table-striped table-bordered display" 
-                   id ="listaResponsavel" >
-
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>RG</th>
-                        <th>Status</th>
-                        <th>Nome de Usuário</th>
-                        <th>Opções</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>RG</th>
-                        <th>Status</th>
-                        <th>Nome de Usuário</th>
-                        <th>Opções</th>
-                    </tr>
-                </tfoot>
-
-                <jsp:useBean class="DAO.ResponsavelDAO" id="resDAO" />
-
-                <tbody>
-                    <c:forEach var="res" items="${resDAO.lista}">
+                    <thead>
                         <tr>
-                            <td>${res.idresponsavel}</td>
-                            <td>${res.nome}</td>
-                            <td>${res.cpf}</td>
-                            <td>${res.rg}</td>
-                            <td>
-                                <c:if test="${res.status == 2}" > Desativado </c:if>
-                                <c:if test="${res.status == 1}" > Ativado </c:if>
-                            </td>
-                            <td>${res.usuario}</td>
-                            <td>
-                                <a class="btn btn-primary" href="gerenciar_responsavel.do?acao=alterar&idresponsavel=${res.idresponsavel}">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                </a>
-                                <button class="btn btn-danger" onclick="confirmarExclusao(${res.idresponsavel}, '${res.nome}')" >
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                </button>    
-                            </td>
+                            <th style="text-align: center;">ID</th>
+                            <th>Nome</th>
+                            <th style="text-align: center;">Status</th>
+                            <th style="text-align: center;">Editar</th>
+                            <th style="text-align: center;">Excluir</th>
                         </tr>
-                    </c:forEach>                    
-                </tbody>    
-            </table>    
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th style="text-align: center;">ID</th>
+                            <th>Nome</th>
+                            <th style="text-align: center;">Status</th>
+                            <th style="text-align: center;">Editar</th>
+                            <th style="text-align: center;">Excluir</th>
+                        </tr>
+                    </tfoot>
+
+                    <jsp:useBean class="DAO.ResponsavelDAO" id="resDAO" />
+
+                    <tbody>
+                        <c:forEach var="res" items="${resDAO.lista}">
+                            <tr>
+                                <td style="text-align: center;">${res.idresponsavel}</td>
+                                <td>${res.nome}</td>
+                                <td style="text-align: center;">
+                                    <c:if test="${res.status == 2}" > Desativado </c:if>
+                                    <c:if test="${res.status == 1}" > Ativado </c:if>
+                                    </td>
+                                <td style="text-align: center;">
+                                    <a class="icone_lista" href="gerenciar_responsavel.do?acao=alterar&idresponsavel=${res.idresponsavel}">
+                                         <img src="assets/img/lista/editar.png">
+                                    </a>
+                                </td>
+                                <td style="text-align: center;">
+                                    <button class="icone_lista deletar" onclick="confirmarExclusao(${res.idresponsavel}, '${res.nome}')" >
+                                        <img src="assets/img/lista/deletar.png">
+                                    </button>    
+                                </td>
+                            </tr>
+                        </c:forEach>                    
+                    </tbody>    
+                </table>    
+            </div>
         </div>
 
         <script type="text/javascript" src="datatables/jquery.js"></script>
         <script type="text/javascript" src="datatables/jquery.dataTables.min.js" ></script>
         <script type="text/javascript" >
-                
-            $(document).ready(function(){
-                $("#listaResponsavel").dataTable({
-                    "bJQueryUI":  true,
-                    "oLanguage": {
-                        "sProcessing": "Processando ...",
-                        "sLengthMenu": "Mostrar _MENU_ registros",
-                        "sZeroRecords": "Não foram encontrados resultados",
-                        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                        "sInfoEmpty": "Mostrando de 0 até 0 de 0 resgistros",
-                        "sInfoFiltered": "",
-                        "sInfoPostFix": "",
-                        "sSearch": "Pesquisar",
-                        "sUrl": "",
-                        "oPaginate": {
-                            "sFirst" : "Primeiro",
-                            "sPrevious": "Anterior",
-                            "sNext": "Próximo",
-                            "sLast": "Último"
-                        }
-                    }
-                        
-                });
-                    
-            });
+
+                                        $(document).ready(function () {
+                                            $("#listaResponsavel").dataTable({
+                                                "bJQueryUI": true,
+                                                "oLanguage": {
+                                                    "sProcessing": "Processando ...",
+                                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                                    "sZeroRecords": "Não foram encontrados resultados",
+                                                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                                                    "sInfoEmpty": "Mostrando de 0 até 0 de 0 resgistros",
+                                                    "sInfoFiltered": "",
+                                                    "sInfoPostFix": "",
+                                                    "sSearch": "Pesquisar",
+                                                    "sUrl": "",
+                                                    "oPaginate": {
+                                                        "sFirst": "Primeiro",
+                                                        "sPrevious": "Anterior",
+                                                        "sNext": "Próximo",
+                                                        "sLast": "Último"
+                                                    }
+                                                }
+
+                                            });
+
+                                        });
         </script>
     </body>
 </html>

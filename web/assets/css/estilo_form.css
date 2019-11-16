@@ -28,3 +28,7 @@ h3:after{
     color:#4F4F4F;
     opacity: .5;
 }
+ nav a{
+   font-family: 'Lato', sans-serif;
+   font-weight: bold;
+}

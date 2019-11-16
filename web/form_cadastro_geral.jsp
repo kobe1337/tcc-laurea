@@ -13,7 +13,7 @@
 
         <title>Láurea Reforço Escolar</title>
     </head>
-    <body class="body">
+    <body class="">
         <%@include file="menu.jsp" %>
 
 

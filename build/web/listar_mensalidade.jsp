@@ -9,102 +9,87 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, 
-              user-scalable=no" name="viewport"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+        <link rel="stylesheet" type="text/css" href="assets/css/estilo_listas.css">
         <link rel="stylesheet" href="datatables/jquery.dataTables.min.css"/>
-        <title>Láurea Reforço Escolar</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="assets/img/logo/logo_menu.png"/>
+        <title>Listar Mensalidade</title>
 
     </head>
-    <body>
-        <div class="container">
-            <%@include file="banner.jsp" %>
-            <%@include file="menu.jsp" %>
-            <h1>Lista de Mensalidades</h1>
+    <body class="body">
+        <%@include file="menu.jsp" %>
+        <div class="row">
+            <a href="form_mensalidade.jsp" class="" > <div class="float-left" id="btn_cadastrar"> Cadastrar Mensalidade</div></a>
+        </div>
 
-            <a href="form_mensalidade.jsp" class="btn btn-primary">
-                Novo Cadastro
-            </a>
-            <table class="table table-hover table-striped table-bordered display" 
-                   id ="listaMensalidade" >
+        <div class="row  justify-content-center" id="listagem">
 
-                <thead>
-                    <tr>
-                        <th>Nº Con</th>
-                        <th>Nº Men</th>
-                        <th>Nome do Aluno</th>
-                        <th>Nome do Resp.</th>
-                        <th>Mês</th>
-                        <th>Data de Venc</th>
-                        <th>Data do Pag</th>
-                        <th>Valor</th>
-                        <th>Multa</th>
-                        <th>Desconto</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Opções</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Nº Con</th>
-                        <th>Nº Men</th>
-                        <th>Nome do Aluno</th>
-                        <th>Nome do Resp.</th>
-                        <th>Mês</th>
-                        <th>Data de Venc</th>
-                        <th>Data do Pag</th>
-                        <th>Valor</th>
-                        <th>Multa</th>
-                        <th>Desconto</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Opções</th>
-                    </tr>
-                </tfoot>
+            <div class="table-responsive">
+                <table class="table table-hover table-sm table-striped"
+                       id ="listaMensalidade" >
 
-                <jsp:useBean class="DAO.MensalidadeDAO" id="menDAO" />
-                <jsp:useBean class="DAO.ResponsavelDAO" id="resDAO" />
-                <jsp:useBean class="DAO.AlunoDAO" id="aDAO" />
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Contrato</th>
+                            <th>Aluno</th>
+                            <th>Responsável</th>
+                            <th style="text-align: center;">Valor</th>
+                            <th style="text-align: center;">Vencimento</th> 
+                            <th style="text-align: center;">Status</th>
+                            <th style="text-align: center;">Editar</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th style="text-align: center;">Contrato</th>
+                            <th>Aluno</th>
+                            <th>Responsável</th>
+                            <th style="text-align: center;">Valor</th>
+                            <th style="text-align: center;">Vencimento</th>
+                            <th style="text-align: center;">Status</th>
+                            <th style="text-align: center;">Editar</th>
+                        </tr>
+                    </tfoot>
 
-                <tbody>
-                    <c:forEach var="men" items="${menDAO.lista}">
-                        <c:forEach var="res" items="${resDAO.lista}">
-                            <c:forEach var="a" items="${aDAO.lista}">
-                                <c:if test="${ulogado.perfil == 'Administrador(a)' || ulogado.perfil == 'Secretário(a)'
-                                              || ulogado.nome == res.usuario.nome}">
-                                    <c:if test="${men.contrato.aluno.responsavel.nome == res.nome && men.contrato.aluno.nome == a.nome}">
-                                        <tr>
-                                            <td>${men.contrato.idcontrato}</td>
-                                            <td>${men.idmensalidade}</td>
-                                            <td>${men.contrato.aluno.nome}</td>
-                                            <td>${men.contrato.aluno.responsavel.nome}</td>
-                                            <td>${men.mes}</td>
-                                            <td>${men.datav}</td>
-                                            <td>${men.datap}</td>
-                                            <td>R$${men.valor}</td>
-                                            <td>R$${men.multa}</td>
-                                            <td>R$${men.desconto}</td>
-                                            <td>R$${men.valor + men.multa - men.desconto}</td>
-                                            <td>
-                                                <c:if test="${men.status == 2}" > Pendente </c:if>
-                                                <c:if test="${men.status == 1}" > Pago </c:if>
+                    <jsp:useBean class="DAO.MensalidadeDAO" id="menDAO" />
+                    <jsp:useBean class="DAO.ResponsavelDAO" id="resDAO" />
+                    <jsp:useBean class="DAO.AlunoDAO" id="aDAO" />
+
+                    <tbody>
+                        <c:forEach var="men" items="${menDAO.lista}">
+                            <c:forEach var="res" items="${resDAO.lista}">
+                                <c:forEach var="a" items="${aDAO.lista}">
+                                    <c:if test="${ulogado.perfil == 'Administrador(a)' || ulogado.perfil == 'Secretário(a)'
+                                                  || ulogado.nome == res.usuario.nome}">
+                                        <c:if test="${men.contrato.aluno.responsavel.nome == res.nome && men.contrato.aluno.nome == a.nome}">
+                                            <tr>
+                                                <td style="text-align: center;">${men.contrato.idcontrato}</td>
+                                                <td>${men.contrato.aluno.nome}</td>
+                                                <td>${men.contrato.aluno.responsavel.nome}</td>
+                                               
+                                                <td style="text-align: center;">R$${men.valor}</td>
+                                                 <td style="text-align: center;">${men.datap}</td>
+                                                <td style="text-align: center;">
+                                                    <c:if test="${men.status == 2}" > Pendente </c:if>
+                                                    <c:if test="${men.status == 1}" > Pago </c:if>
+                                                    </td>
+                                                    <td style="text-align: center;"> 
+                                                        <a class="icone_lista" 
+                                                           href="gerenciar_mensalidade.do?acao=alterar&idcontrato=${men.contrato.idcontrato}&idmensalidade=${men.idmensalidade}">
+                                                       <img src="assets/img/lista/editar.png">
+                                                    </a>
                                                 </td>
-                                                <td>
-                                                    <a class="btn btn-primary" 
-                                                       href="gerenciar_mensalidade.do?acao=alterar&idcontrato=${men.contrato.idcontrato}&idmensalidade=${men.idmensalidade}">
-                                                    <i class="glyphicon glyphicon-pencil"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                            </tr>
+                                        </c:if>
                                     </c:if>
-                                </c:if>
+                                </c:forEach>                    
                             </c:forEach>                    
                         </c:forEach>                    
-                    </c:forEach>                    
-                </tbody>    
-            </table>    
+                    </tbody>    
+                </table>    
+            </div>
         </div>
 
         <script type="text/javascript" src="datatables/jquery.js"></script>
