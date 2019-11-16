@@ -5,6 +5,8 @@
 <%
     Usuario ulogado = GerenciarLogin.verificarAcesso(request, response);
     request.setAttribute("ulogado", ulogado);
+    
+    out.println("SATANAAAS");
 %>
 <head>
     <meta charset="utf-8"/>
@@ -18,7 +20,7 @@
         <img src="assets/img/logo/logo_menu.png"> 
 
         <c:if test="${ulogado!=null}">${ulogado.nome}</c:if>
-
+            
         </div>
 
     <c:if test="${ulogado != null && ulogado.perfil != null}">
